@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@plugin "daisyui"{
+  themes: light;
+}
+
+body{
+  background: url("../public/bg.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
