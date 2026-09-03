@@ -12,6 +12,8 @@ const userSlice = createSlice({
         },
         setOtherUsers:(state, action)=>{
             state.otherUsers = action.payload;
+            // console.log("this is setother users", action.payload);
+            // console.log("state.otherUsers: ", state.otherUsers)
         }
     }
 });

@@ -1,6 +1,10 @@
 import React from 'react'
 
-const OtherUser = () => {
+const OtherUser = (props) => {
+    // console.log(props)
+    const user = props.user;
+    // console.log("Now from here: ");
+    // console.log(user?.fullName);
   return (
     <div>
         {/* <div className='flex gap-2 items-center hover:bg-zinc-200 rounded-sm cursor-pointer'> */}
@@ -13,7 +17,9 @@ const OtherUser = () => {
 
                 <div className='flex flex-col flex-1'>
                     <div className="flex justify-between gap-2">
-                        <p className='text-sm'>Patal Mernstack</p>
+                        {/* <p className='text-sm'>Patal Mernstack</p> */}
+                        {/* <p className='text-sm'>{props.user.fullName}</p> */}
+                        <p className='text-sm'>{user?.fullName}</p>
                     </div>
                 </div>
 

@@ -52,16 +52,32 @@ import { useSelector } from 'react-redux';
 const OtherUsers = () => {
   // my custom hook 
   useGetOtherUser();
-  const {OtherUsers} = useSelector(store=>store.user);
-  // console.log("Hello world")
-  // console.log(OtherUsers);
+  const {otherUsers} = useSelector((store)=>store.user); // both are same (this is destructuring)
+  // const otherUsers = useSelector((state)=>state.user.otherUsers); (directly accessing the property)
+  console.log("Hello world")
+  console.log(otherUsers);
+
+//   otherUsers.forEach((user) => {
+//   console.log(user);
+  
+//  });
+
+console.log("I am testing this foreach");
+
+
+ if(otherUsers){
+  console.log("it contains values");
+  otherUsers.forEach((user) => {
+    console.log("One user: ", user);
+  })
+}
 
   if(!OtherUsers) return; // early return in react
   
   return (
     <div className='overflow-auto'>
       {
-        OtherUsers?.map((user)=>{
+        otherUsers?.map((user)=>{
           return(
             <OtherUser key={user._id} user={user}/>
           )
