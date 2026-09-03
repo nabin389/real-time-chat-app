@@ -46,9 +46,12 @@ export const register = async(req,res)=>{
 }
 
 
+
 export const login = async(req, res)=>{
     const{username, password} = req.body;
+
     try{
+
         // const {username, password} = req.body;
         if(!username || !password){
             return res.status(400).json({message: "All fields are required"});
@@ -78,12 +81,26 @@ export const login = async(req, res)=>{
 
         // const token = xy
 
-        return res.status(200).cookie("token", token, {maxAge:1*24*60*60*1000, httpOnly: true, sameSite:'strict'}).json({
-            _id:user._id,
-            username: user.username,
-            fullName: user.fullName,
-            profilePhoto: user.profilePhoto
-        })
+        // return res.status(200).cookie("token", token, {maxAge:1*24*60*60*1000, httpOnly: true, sameSite:'strict'}).json({
+        //     _id:user._id,
+        //     username: user.username,
+        //     fullName: user.fullName,
+        //     profilePhoto: user.profilePhoto
+        // })
+        
+return res.status(200).cookie("token", token, {
+    maxAge: 24 * 60 * 60 * 1000,
+    httpOnly: true,
+    sameSite: "lax",
+    secure: false
+}).json({
+    _id: user._id,
+    username: user.username,
+    fullName: user.fullName,
+    profilePhoto: user.profilePhoto
+});
+
+
 
         
 
@@ -112,6 +129,7 @@ export const logout = (req,res) => {
 }
 
 export const getOtherUsers = async(req, res) => {
+
     try{
         const loggedInUserId = req.id;
         // const otherUsers = await User.find({_id:{$ne: loggedInUserId}}).select("-password username"); //this is not possible both inclusion and exclusion is not possible at a same time // it gives when id is not equal to this
