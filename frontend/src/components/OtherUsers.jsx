@@ -54,32 +54,32 @@ const OtherUsers = () => {
   useGetOtherUser();
   const {otherUsers} = useSelector((store)=>store.user); // both are same (this is destructuring)
   // const otherUsers = useSelector((state)=>state.user.otherUsers); (directly accessing the property)
-  console.log("Hello world")
-  console.log(otherUsers);
+  // console.log("Hello world")
+  // console.log(otherUsers);
 
 //   otherUsers.forEach((user) => {
 //   console.log(user);
   
 //  });
 
-console.log("I am testing this foreach");
+// console.log("I am testing this foreach");
 
 
- if(otherUsers){
-  console.log("it contains values");
-  otherUsers.forEach((user) => {
-    console.log("One user: ", user);
-  })
-}
+//  if(otherUsers){
+//   otherUsers.forEach((user) => {
+//     console.log("One user: ", user);
+//   })
+// }
 
   if(!OtherUsers) return; // early return in react
   
   return (
-    <div className='overflow-auto'>
+    // <div className='overflow-auto'>
+    <div className='overflow-auto flex-1'>
       {
         otherUsers?.map((user)=>{
           return(
-            <OtherUser key={user._id} user={user}/>
+            <OtherUser key={user._id}  user={user}/>
           )
         })
       }

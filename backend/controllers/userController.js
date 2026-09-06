@@ -45,9 +45,8 @@ export const register = async(req,res)=>{
     }
 }
 
-
-
 export const login = async(req, res)=>{
+
     const{username, password} = req.body;
 
     try{
@@ -77,7 +76,7 @@ export const login = async(req, res)=>{
             userId: user._id
         }
 
-        const token = jwt.sign(tokenData, process.env.JWT_SECRET_KEY, {expiresIn:'1d'});
+        const token = jwt.sign(tokenData, process.env.JWT_SECRET_KEY, {expiresIn:'10d'});
 
         // const token = xy
 
@@ -114,6 +113,7 @@ return res.status(200).cookie("token", token, {
 }
 
 export const logout = (req,res) => {
+
     try{
         return res.status(200).cookie("token", "", {maxAge:0}).json({
             message: "Logged out successfully."
@@ -129,7 +129,7 @@ export const logout = (req,res) => {
 }
 
 export const getOtherUsers = async(req, res) => {
-
+ // it give other users that has not loged in i.e other users
     try{
         const loggedInUserId = req.id;
         // const otherUsers = await User.find({_id:{$ne: loggedInUserId}}).select("-password username"); //this is not possible both inclusion and exclusion is not possible at a same time // it gives when id is not equal to this

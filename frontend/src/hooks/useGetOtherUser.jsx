@@ -11,6 +11,7 @@ const useGetOtherUser = () => {
         // get other user
         axios.defaults.withCredentials = true;
         const res = await axios.get("http://localhost:3000/api/v1/user/");
+        // console.log("Dont know: ", res);
 
         // login
         // const res = await axios.post(
@@ -23,8 +24,8 @@ const useGetOtherUser = () => {
         //     withCredentials: true,
         //   },
         // );
-        console.log("response comes from backend");
-        console.log(res.data);
+        // console.log("response comes from backend");
+        // console.log(res.data);
         //store
         dispatch(setOtherUsers(res.data));
       } catch (error) {
@@ -38,32 +39,3 @@ const useGetOtherUser = () => {
 };
 
 export default useGetOtherUser;
-
-// import React, { useEffect } from 'react';
-// import axios from 'axios';
-
-// const useGetOtherUser = () => {
-//     useEffect(() => {
-//         const fetchOtherUsers = async () => {
-//             try {
-//                 const res = await axios.get(
-//                     "http://localhost:3000/api/v1/user/",
-//                     {
-//                         withCredentials: true
-//                     }
-//                 );
-
-//                 console.log("response comes from backend");
-//                 console.log(res.data);
-
-//             } catch (error) {
-//                 console.log("Error has occurred");
-//                 console.log(error);
-//             }
-//         };
-
-//         fetchOtherUsers();
-//     }, []);
-// };
-
-// export default useGetOtherUser;

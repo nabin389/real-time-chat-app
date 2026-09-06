@@ -1,8 +1,33 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
 import OtherUsers from "./OtherUsers";
+import axios from "axios";
+import toast from 'react-hot-toast';
+import {useNavigate} from 'react-router-dom'
 
 const Slidebar = () => {
+  const navigate = useNavigate();
+
+  const logoutHandler = async () => {
+          // console.log("Before logout response");
+          // toast.success("Hello world");
+          // navigate('/login');
+    try{
+      console.log("Before logout response");
+      const res = await axios.get('http://localhost:3000/api/v1/user/logout');
+      console.log("Before logout response");
+      console.log("This is: ", res);
+      console.log("This is: ", res.data.message);
+      toast.success(res.data.message);
+      navigate('/login');
+
+
+    } catch(error){
+      console.log("Error occured: ",error);
+    }
+
+  }
+
   return (
     <div className="border-r border-slate-500 p-4 flex flex-col ">
       <form action="" className="flex items-center">
@@ -31,7 +56,8 @@ const Slidebar = () => {
       <div className="divider px-3" > </div>
       <OtherUsers/>
       <div className="mt-2 ">
-        <button className="btn btn-sm  bg-gray-300  border-gray-400  rounded-[7px]">Logout</button>
+        {/* <button onClick={()=>{logoutHandler()}} className="btn btn-sm  bg-gray-300  border-gray-400  rounded-[7px]">Logout</button> */}
+        <button onClick={logoutHandler} className="btn btn-sm  bg-gray-300  border-gray-400  rounded-[7px]">Logout</button>
       </div>
 
     </div>

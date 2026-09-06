@@ -14,12 +14,17 @@ const Login = () => {
     password:""
   })
 
+  // console.log(user.username);
+  // console.log(user.password);
+  // console.log(user);
+
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleCheckbox = (gender)=> {
-    setUser({...user, gender}) //spread operator gives old data while inserting new data normally old data get overwrite and it prevent this so that we can get old data
-  }
+  // const handleCheckbox = (gender)=> {
+  //   setUser({...user, gender}) //spread operator gives old data while inserting new data normally old data get overwrite and it prevent this so that we can get old data
+  // }
 
 
   const onSubmitHandler = async(e) =>{
@@ -39,9 +44,9 @@ const Login = () => {
 
  
       console.log("Response: ", res);
-        navigate("/");
-        toast.success(res.data.message);
-        dispatch(setAuthUser(res.data));
+      toast.success(res.data.message);
+      dispatch(setAuthUser(res.data));
+      navigate("/");
 
     } catch (error) {
       console.log("error:", error.response.data.message)
