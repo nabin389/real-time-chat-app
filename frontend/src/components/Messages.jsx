@@ -12,16 +12,22 @@ const Messages = () => {
   // now important: 
   useGetMessages();  // call the function inside hook
   const {messages} = useSelector(store => store.message);
-  // console.log("Here it is : ", messages);
+  // console.log("Here it is  inside messages: ", messages);
   if(!messages) return;
-  if(!messages.conversation) return;
+  // if(!messages.conversation) return;
 
   // console.log("Inside Messages: ", messages.conversation);
   // console.log("Inside Messages: ", messages);
   return (
     <div className='px-1 flex-1 overflow-auto '>
       {
-        messages.conversation.messages.map((message)=>{
+        // messages.conversation.messages.map((message)=>{
+        //   return(
+        //     <Message key={message._id} message={message.message}/>
+        //   )
+        // })
+
+        messages.map((message)=>{
           return(
             <Message key={message._id} message={message.message}/>
           )

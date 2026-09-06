@@ -27,7 +27,8 @@ const useGetMessages = () => {
                 // console.log("This: ", res.data.conversation.messages);
                 // console.log("This: ", res.data);
 
-                dispatch(setMessage(res?.data));  // it call reducer function to store data
+                // dispatch(setMessage(res?.data));  // it call reducer function to store data
+                dispatch(setMessage(res?.data?.conversation?.messages));  // it call reducer function to store data
 
                 // console.log("Message: ", res?.data.message);
                 // console.log("Conversation: ", res?.data.conversation.messages);
