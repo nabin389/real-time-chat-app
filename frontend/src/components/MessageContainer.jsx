@@ -5,8 +5,10 @@ import { useSelector } from "react-redux";
 
 const MessageContainer = () => {
   const {selectedUser, authUser} = useSelector(state => state.user);
-  console.log("Now --> ", selectedUser)
-  console.log("");
+  // console.log("Now --> ", selectedUser)
+  // console.log("");
+
+  
   // console.log("Auth User: ", authUser);
   // console.log("Now --> ", selectedUser?.fullName)
   // console.log("Now --> ", selectedUser?.profilePhoto)

@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import OtherUsers from "./OtherUsers";
 import axios from "axios";
 import toast from 'react-hot-toast';
 import {useNavigate} from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
+import { setOtherUsers } from "../redux/userSlice";
 
 const Slidebar = () => {
+  const [search, setSearch] = useState("");
+  const {otherUsers} = useSelector(store=>store.user);
+  const dispatch = useDispatch();
+  // console.log(search);
+
   const navigate = useNavigate();
 
   const logoutHandler = async () => {
@@ -28,10 +35,28 @@ const Slidebar = () => {
 
   }
 
+  const searchSubmitHandler = (e)=>{
+    e.preventDefault();
+    console.log(search)
+    // what you have to do is dont use original like this 
+    // create usestate or other concept for this 
+    const conversationUser = otherUsers?.find((user)=> user.fullName.toLowerCase().includes(search.toLowerCase()));
+    if(conversationUser){
+      dispatch(setOtherUsers([conversationUser]));  
+      // console.log("This has found: ", conversationUser);
+    }else{
+      toast.error("User not found!");
+
+    }
+  }
+
   return (
     <div className="border-r border-slate-500 p-4 flex flex-col ">
-      <form action="" className="flex items-center">
+      <form onSubmit={searchSubmitHandler} action="" className="flex items-center">
         <input
+        value={search}
+        onChange={(e)=>setSearch(e.target.value)}
+
           // className='input input-bordered rounded-md'
           className="input input-bordered rounded-full w-full 
                      bg-white/90 text-gray-900 placeholder-gray-500

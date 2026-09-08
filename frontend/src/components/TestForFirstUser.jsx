@@ -6,7 +6,8 @@ const TestForFirstUser = () => {
     <h2 className='text-2xl text-white text-center'>
         {/* Let's start conversation */}
         {/* No message yet! */}
-        Your conversation starts here.
+        {/* Your conversation starts here. */}
+        Your can start conversation here.
         </h2>
 </div>
   )
