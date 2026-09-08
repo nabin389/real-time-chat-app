@@ -125,8 +125,8 @@ const Signup = () => {
       );
 
       if(res.status){
-        // console.log()
-      console.log("Response: ", res);
+        console.log()
+      console.log("Response while signup: : ", res);
         navigate("/login");
         toast.success(res.data.message);
       }

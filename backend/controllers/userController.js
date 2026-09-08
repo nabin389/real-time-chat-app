@@ -8,6 +8,8 @@ import jwt from "jsonwebtoken";
 export const register = async(req,res)=>{
     try{
         const {fullName, username, password, confirmPassword, gender} = req.body;
+
+
         if(!fullName || !username || !password || !confirmPassword || !gender){
             return res.status(200).json({message: "All fields are required"});
         }
@@ -16,15 +18,36 @@ export const register = async(req,res)=>{
             return res.status(400).json({message: "Password do not match"});
         }
 
+      
+
         const user = await User.findOne({username});
         if(user){
             return res.status(400).json({message: "Username already exit try different",
                 user:user
             });
         }
+
+    
         const hashedPassword = await bcrypt.hash(password, 10);
-        const maleProfilePhoto = `https://i.pravatar.cc/150?u=a042581f4e29026704d`;
-        const femaleProfilePhoto = `https://i.pravatar.cc/150?u=a042581f4e29026704d`;
+
+
+        // normally
+        // const maleProfilePhoto = `https://i.pravatar.cc/150?u=a042581f4e29026704d`;
+        // const femaleProfilePhoto = `https://i.pravatar.cc/150?u=a042581f4e29026704d`;
+
+        // give image if id provided
+        // const maleProfilePhoto = `https://api.dicebear.com/10.x/adventurer/svg?seed=male-${user._id}`;
+        // const femaleProfilePhoto = `https://api.dicebear.com/10.x/adventurer/svg?seed=female-${user._id}`;
+        
+        //for mr best
+        // const maleProfilePhoto = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ6MWyBbivsR1zt7dl8rKSYnQzTrMP1Sf9BU5WohTC2Q&s`;
+
+
+        // For default image
+        const maleProfilePhoto = `https://cdn-icons-png.flaticon.com/512/3135/3135715.png`;
+        const femaleProfilePhoto = `https://cdn-icons-png.flaticon.com/512/6997/6997662.png`;
+
+
         await User.create({
             fullName,
             username,
@@ -88,11 +111,12 @@ export const login = async(req, res)=>{
         // })
         
 return res.status(200).cookie("token", token, {
-    maxAge: 24 * 60 * 60 * 1000,
+    maxAge: 10 * 24 * 60 * 60 * 1000,  // 1o days
     httpOnly: true,
     sameSite: "lax",
     secure: false
 }).json({
+    message: "Login Successfully!",
     _id: user._id,
     username: user.username,
     fullName: user.fullName,
@@ -143,4 +167,44 @@ export const getOtherUsers = async(req, res) => {
             error
         })
     }
+}
+
+
+// it works
+export const deleteUsers = async(req, res)=>{
+    const {id} = req.params;
+
+    try{
+        const existingUser = await User.findById(id);
+        // if(existingUser){
+        //     return res.json({
+        //         message: "User Exist",
+        //         existingUser
+        //     })
+        // } 
+        // else{
+        //     return res.json({
+        //         message: "User not exit"
+        //     })
+        // }
+
+        const user = await User.findByIdAndDelete(id);
+        if(!user){
+            return res.json({
+                message: "User not found"
+            });
+        }
+
+        return res.json({
+            message: "User deleted successfully",
+            user
+        })
+
+    }catch(error){
+        return res.json({
+            message: "Error has occured",
+            Error: error
+        })
+    }
+
 }

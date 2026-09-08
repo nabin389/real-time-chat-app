@@ -1,6 +1,6 @@
 
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -27,9 +27,14 @@ const Login = () => {
   // }
 
 
+
+
   const onSubmitHandler = async(e) =>{
     e.preventDefault();
     // console.log(user);
+
+    
+  // useEffect(()=> { // added by me
      try {
       const res = await axios.post(
         "http://localhost:3000/api/v1/user/login",
@@ -38,12 +43,12 @@ const Login = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          withCredentials: true,
+          withCredentials: true,  // for middleware like authentication middleware
         },
       );
 
  
-      console.log("Response: ", res);
+      console.log("Response comes on login: ", res);
       toast.success(res.data.message);
       dispatch(setAuthUser(res.data));
       navigate("/");
@@ -55,10 +60,15 @@ const Login = () => {
     }
 
 
+    // }, []) //this is useeffect added by me
+
+
     setUser({
     username:"",
     password:""
   });
+
+
 }
   return (
     <div className="min-h-screen w-full flex items-center justify-center px-4">

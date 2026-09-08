@@ -9,7 +9,8 @@ const SendInput = () => {
   const dispatch = useDispatch();
   const {selectedUser} = useSelector(store=> store.user);
   const {messages} = useSelector(store=> store.message);
-  console.log("This is old message: ", messages);
+  // if(!message) return; // done by me
+  // console.log("This is old message: ", messages);
   // console.log("This is old message: ", messages?.conversation.messages);
   // console.log("selectedUser in message Input: ", selectedUser);
   // console.log("selectedUser in message Input: ", selectedUser?._id);
@@ -23,7 +24,7 @@ const SendInput = () => {
         },
         withCredentials: true // it is needed because middleware is used in backend
     });
-      console.log("Respponse in message input: ", res.data.newMessage);
+      // console.log("Respponse in message input: ", res.data.newMessage);
 
       // dispatch(setMessage(...messages?.conversation?.messages, res?.data?.newMessage));
       dispatch(setMessages([...messages, res?.data.newMessage]))
