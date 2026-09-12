@@ -52,6 +52,7 @@ const MessageContainer = () => {
           <div>
             {authUser && <h2 className="text-4xl text-white font-bold">Hi {authUser?.fullName}</h2>}
           <h2 className="text-2xl text-white">
+            {/* Hi,{} */}
             Let's start conversation
             </h2>
           </div>

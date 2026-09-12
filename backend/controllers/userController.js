@@ -4,6 +4,79 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
 
+// for multer  
+export const registerMulter = async(req,res)=>{
+    try{
+        const {fullName, username, password, confirmPassword, gender} = req.body;
+
+
+        // if(!fullName || !username || !password || !confirmPassword || !gender){
+        //     return res.status(200).json({message: "All fields are required"});
+        // }
+
+        // if(password !== confirmPassword){
+        //     return res.status(400).json({message: "Password do not match"});
+        // }
+
+      
+
+        // const user = await User.findOne({username});
+        // if(user){
+        //     return res.status(400).json({message: "Username already exit try different",
+        //         user:user
+        //     });
+        // }
+
+    
+        // const hashedPassword = await bcrypt.hash(password, 10);
+
+
+        // For default image
+        // const maleProfilePhoto = `https://cdn-icons-png.flaticon.com/512/3135/3135715.png`;
+        // const femaleProfilePhoto = `https://cdn-icons-png.flaticon.com/512/6997/6997662.png`;
+
+        const file = req.file;
+        if(!file){
+            return res.json({
+                message: "Profile Picture is Required"
+            })
+        }
+        
+        const filePath = file.filename;
+//         const profilePhoto = `http://localhost:3000/uploads/${filePath}`
+//         return res.json({
+//     message: "working till here ",
+//     username,
+//     profilePhoto
+    
+// })
+
+
+        await User.create({
+            fullName,
+            username,
+            password: hashedPassword,
+            // profilePhoto: gender==="male"?maleProfilePhoto:femaleProfilePhoto,
+            profilePhoto: `http://localhost:3000/uploads/${filePath}`
+        });
+        return res.status(201).json({
+            message: "Account created successfully"
+        })
+    }
+    catch(error){
+        console.log(error);
+        return res.status(401).json({
+            message: "Error has occured",
+            error
+        })
+    }
+}
+
+
+
+
+
+
 
 export const register = async(req,res)=>{
     try{
