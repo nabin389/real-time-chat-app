@@ -24,8 +24,10 @@ import MessageContainer from './MessageContainer'
 const HomePage = () => {
   return (
     <div className='flex items-center justify-center h-screen w-screen overflow-y-auto py-4'>
-      {/* <div className='flex h-[80vh] max-h-[550px] w-full sm:w-[70%] md:w-1/2 lg:w-1/4 rounded-lg overflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0 shadow-2xl'> this (md:w-1/2 lg:w-1/4 ) was the problem */} 
+    {/* // <div className='flex flex-col items-center justify-center h-screen w-screen overflow-y-auto py-4'>
+    //   <div>Hi user</div> */}
       <div className='flex h-[80vh] w-full sm:w-[70%] rounded-lg overflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0 shadow-2xl'>
+        
         <Slidebar />
         <MessageContainer />
       </div>

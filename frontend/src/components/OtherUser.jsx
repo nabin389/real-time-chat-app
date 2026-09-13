@@ -14,6 +14,8 @@ const OtherUser = ({user}) => {
     // console.log(user.profilePhoto);
   
   function selectedUserHandler(user){
+
+
     dispatch(setSelectedUser(user));
 
     // console.log("this is props");

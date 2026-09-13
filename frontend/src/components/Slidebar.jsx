@@ -5,7 +5,9 @@ import axios from "axios";
 import toast from 'react-hot-toast';
 import {useNavigate} from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
-import { setOtherUsers } from "../redux/userSlice";
+import { setAuthUser, setOtherUsers, setSelectedUser } from "../redux/userSlice";
+import { setMessage } from "../redux/messageSlice";
+// import Logout from "./Logout";
 
 const Slidebar = () => {
   const [search, setSearch] = useState("");
@@ -13,9 +15,13 @@ const Slidebar = () => {
   const dispatch = useDispatch();
   // console.log(search);
 
+  // const [out, setOut] = useState(false);
+
   const navigate = useNavigate();
 
   const logoutHandler = async () => {
+
+
           // console.log("Before logout response");
           // toast.success("Hello world");
           // navigate('/login');
@@ -26,9 +32,17 @@ const Slidebar = () => {
       console.log("This is: ", res);
       console.log("This is: ", res.data.message);
       toast.success(res.data.message);
+
+      // from here all data have to delete 
+       // trying to null everything at the begining to solve error by me
+        dispatch(setAuthUser(null));
+        dispatch(setOtherUsers(null));
+        dispatch(setSelectedUser(null));
+        dispatch(setMessage(null));
+
       navigate('/login');
 
-
+    setOut(true);
     } catch(error){
       console.log("Error occured: ",error);
     }
@@ -82,7 +96,14 @@ const Slidebar = () => {
       <OtherUsers/>
       <div className="mt-2 ">
         {/* <button onClick={()=>{logoutHandler()}} className="btn btn-sm  bg-gray-300  border-gray-400  rounded-[7px]">Logout</button> */}
-        <button onClick={logoutHandler} className="btn btn-sm  bg-gray-300  border-gray-400  rounded-[7px]">Logout</button>
+
+        {/* this was before hooks implementation  */}
+        {/* <button onClick={logoutHandler} className="btn btn-sm  bg-gray-300  border-gray-400  rounded-[7px]">Logout</button> */}
+        {/* <Logout handleLogouot={logoutHandler}/> */}
+        <button onClick={logoutHandler} className="btn btn-sm  bg-gray-300  border-gray-400  rounded-[7px]">
+          Logout
+          {/* {out && <Logout/>} */}
+        </button>
       </div>
 
     </div>

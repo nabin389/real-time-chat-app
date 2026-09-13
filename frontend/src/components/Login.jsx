@@ -7,8 +7,15 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setAuthUser } from "../redux/userSlice";
+// this all are added for removing all previous data of redux
+// import { setAuthUser, setOtherUsers, setSelectedUser } from "../redux/userSlice";
+// import { setMessage } from "../redux/messageSlice";
+
+
 
 const Login = () => {
+ 
+
   const [user, setUser] = useState({
     username:"",
     password:""
@@ -33,7 +40,6 @@ const Login = () => {
     e.preventDefault();
     // console.log(user);
 
-    
   // useEffect(()=> { // added by me
      try {
       const res = await axios.post(
@@ -51,6 +57,7 @@ const Login = () => {
       console.log("Response comes on login: ", res);
       toast.success(res.data.message);
       dispatch(setAuthUser(res.data));
+
       navigate("/");
 
     } catch (error) {

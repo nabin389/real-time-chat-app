@@ -21,6 +21,8 @@ const useGetMessages = () => {
                 axios.defaults.withCredentials=true; // because it is used if routes passes through middleware like isAuthenticated
                 // const res = await axios.get(`http://localhost:3000/api/v1/message/6a8d4d1610a4aaf94074706b`);
                 // const res = await axios.get(`http://localhost:3000/api/v1/message/6a8d4d1610a4aaf94074706b`);
+                // console.log("Before response: ");
+                // console.log(selectedUser?._id);
                 const res = await axios.get(`http://localhost:3000/api/v1/message/${selectedUser?._id}`);
 
                 // console.log("After response comes: ");

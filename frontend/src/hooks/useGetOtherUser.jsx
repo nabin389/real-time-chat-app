@@ -11,7 +11,9 @@ const useGetOtherUser = () => {
         // get other user
         axios.defaults.withCredentials = true;
         const res = await axios.get("http://localhost:3000/api/v1/user/");
-        // console.log("Dont know: ", res);
+
+        console.log("Dont know: ", res);
+
 
         // login
         // const res = await axios.post(
