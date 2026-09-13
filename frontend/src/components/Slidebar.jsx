@@ -15,7 +15,6 @@ const Slidebar = () => {
   const dispatch = useDispatch();
   // console.log(search);
 
-  // const [out, setOut] = useState(false);
 
   const navigate = useNavigate();
 
@@ -42,7 +41,6 @@ const Slidebar = () => {
 
       navigate('/login');
 
-    setOut(true);
     } catch(error){
       console.log("Error occured: ",error);
     }
@@ -102,7 +100,6 @@ const Slidebar = () => {
         {/* <Logout handleLogouot={logoutHandler}/> */}
         <button onClick={logoutHandler} className="btn btn-sm  bg-gray-300  border-gray-400  rounded-[7px]">
           Logout
-          {/* {out && <Logout/>} */}
         </button>
       </div>
 
