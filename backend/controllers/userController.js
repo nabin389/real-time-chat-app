@@ -112,6 +112,32 @@ export const registerMulter = async (req, res) => {
   }
 };
 
+// this is used for solving refresh problem
+export const getCurrentUser = async(req, res)=>{
+  const id = req.id;
+  try{
+    const user = await User.findById(id);
+    if(!user){
+      return res.json({
+        message: "User not found"
+      })
+    }
+
+    return res.json({
+      message: "This is user data",
+        _id: user._id,
+        username: user.username,
+        fullName: user.fullName,
+        profilePhoto: user.profilePhoto,
+    })
+  } catch(error){
+    return res.json({
+      message: "error has occured",
+       error
+    })
+  }
+}
+
 export const register = async (req, res) => {
   try {
     const { fullName, username, password, confirmPassword, gender } = req.body;

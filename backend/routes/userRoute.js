@@ -1,5 +1,5 @@
 import express from "express";
-import { deleteUsers, getOtherUsers, login, logout, register, registerMulter, test } from "../controllers/userController.js";
+import { deleteUsers, getCurrentUser, getOtherUsers, login, logout, register, registerMulter, test } from "../controllers/userController.js";
 import isAuthenticated from "../middleware/isAuthenticated.js";
 
 const router = express.Router();
@@ -17,6 +17,9 @@ router.route("/register").post(upload.single("profilePhoto"),registerMulter);
 
 // this is the testing of nodemailer 
 router.route("/test").post(test);
+
+// this is solving the problem of refresh
+router.route("/me").get(isAuthenticated, getCurrentUser);
 
 // making it not workable because to use multer 
 // router.route("/register").post(register); 

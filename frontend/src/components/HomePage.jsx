@@ -17,11 +17,12 @@
 // export default HomePage
 
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import Slidebar from './Slidebar'
 import MessageContainer from './MessageContainer'
 import { useSelector } from 'react-redux'
 const HomePage = () => {
+
   const {authUser} = useSelector(store=>store.user);
   if(authUser){
     console.log("This is authUser:", authUser);

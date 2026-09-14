@@ -10,7 +10,7 @@ const userSlice = createSlice({
     reducers:{
         setAuthUser:(state,action)=>{
             state.authUser = action.payload;
-            // console.log("Data comes on userSlice: ",state.authUser);
+            console.log("Data comes on userSlice: ",state.authUser);
         },
         setOtherUsers:(state, action)=>{
             state.otherUsers = action.payload;
