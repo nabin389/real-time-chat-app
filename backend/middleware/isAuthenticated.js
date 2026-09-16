@@ -8,14 +8,16 @@ const isAuthenticated = async(req, res, next)=>{
             //     message: "User not authenticated."
             // })
             return res.json({
-                message: "User not authenticated."
+                message: "User not authenticated.",
+                success: false // for sending to frontend
             })
         }
         const decode = await jwt.verify(token, process.env.JWT_SECRET_KEY);
         console.log("decode: ", decode);
         if(!decode){
             return res.status(401).json({
-                message: "Invalid token"
+                message: "Invalid token",
+                success: false // for sending to frontend
             });
         }
 

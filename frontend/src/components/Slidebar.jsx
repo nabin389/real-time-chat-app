@@ -63,7 +63,9 @@ const Slidebar = () => {
   }
 
   return (
-    <div className="border-r border-slate-500 p-4 flex flex-col ">
+    // <div className="border-r border-slate-500 p-4 flex flex-col ">
+    //  taking this new 
+    <div className="w-1/2 lg:w-1/3 border-r border-slate-500 p-4 flex flex-col ">
       <form onSubmit={searchSubmitHandler} action="" className="flex items-center">
         <input
         value={search}

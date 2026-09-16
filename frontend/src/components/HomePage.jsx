@@ -13,26 +13,64 @@
 //     </div>
 //   )
 // }
-
 // export default HomePage
 
 
 import React, { useEffect } from 'react'
 import Slidebar from './Slidebar'
 import MessageContainer from './MessageContainer'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { setAuthUser } from '../redux/userSlice'
+import axios from "axios";
+
+
 const HomePage = () => {
 
   const {authUser} = useSelector(store=>store.user);
-  if(authUser){
-    console.log("This is authUser:", authUser);
 
+
+    // can also add set loading feature
+  // to make app that works even when page refresh  that is authUser we get from backend using cookie from browser
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      try {
+        const res = await axios.get("http://localhost:3000/api/v1/user/me", {
+          withCredentials: true,
+        });
+        // console.log("From here ");
+        // console.log(res);
+        // console.log("this is the response of current user: ", res.data);
+        dispatch(setAuthUser(res.data));
+
+      } catch (error) {
+        console.log("User is not logged in");
+        console.log("Error: ", error); // commented this
+      }
+    };
+    getCurrentUser();
+  }, [dispatch]); // give dispatch, empty can also work
+
+
+
+
+  // if(authUser){
+  //   console.log("This is authUser:", authUser);
+
+  // }
+  // console.log("This is next");
+
+  if(!authUser){
+   return(
+    <div className='text-3xl'>Loading...</div>
+   )
   }
-  console.log("This is next");
-  return (
-    // <div className='flex items-center justify-center h-screen w-screen overflow-y-auto py-4'>
-     <div className='flex flex-col items-center justify-center h-screen w-screen overflow-y-auto py-4'>
 
+
+  return (
+
+    //  data seen on the top of page 
+     <div className='flex flex-col items-center justify-center h-screen w-screen overflow-y-auto py-4'>
       <div className="mb-4">
         {
           authUser?(
@@ -52,7 +90,8 @@ const HomePage = () => {
 
 
       <div className='flex h-[80vh] w-full sm:w-[70%] rounded-lg overflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0 shadow-2xl'>
-        
+        {/* this was new only for testing  */}
+      {/* <div className='flex h-[80vh] w-full sm:w-[70%] rounded-lg overflow-hidden bg-red-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0 shadow-2xl'> */}
         <Slidebar />
         <MessageContainer />
       </div>

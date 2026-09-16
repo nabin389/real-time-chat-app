@@ -2,7 +2,7 @@ import React from 'react'
 
 const Report = () => {
   return (
-    <div>404 not found!</div>
+    <div className='text-3xl font-bold text-white tracking-wide'>404 not found!</div>
   )
 }
 

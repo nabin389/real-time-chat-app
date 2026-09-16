@@ -1,14 +1,16 @@
 import React from 'react'
 
-const TestForFirstUser = () => {
+const TestForFirstUser = ({name}) => {
+  console.log("user name is: ", name);
   return (
     <div className="h-full flex justify-center items-center">
     <h2 className='text-2xl text-white text-center'>
         {/* Let's start conversation */}
-        {/* No message yet! */}
-        {/* Your conversation starts here. */}
-        Your can start conversation here.
+        {/* Your can start conversation here. */}
+        Start a conversation with{" "}
+        <span className='font-semibold text-indigo-500 cursor-pointer'>{name}</span>
         </h2>
+        
 </div>
   )
 }

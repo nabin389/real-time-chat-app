@@ -27,8 +27,13 @@ const MessageContainer = () => {
     <>
     {
       selectedUser ? (
-        <div className="md:min-w-97 flex flex-col not-only: ">
+        // <div className="md:min-w-97 flex flex-col not-only: ">
+        // new taking this new
+        <div className="w-1/2 lg:w-2/3 flex flex-col not-only:">
+
+{/* // this is movine with parent this is header div */}
       <div className="flex gap-2 items-center bg-zinc-800 text-white px-4">
+
         <div className="avatar online">
           <div className="w-10 rounded-full">
             {/* <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyh9ZR7j2Oi5JHGSIe2mt2cgeVlwQb4mXg3kXIaPgEJQ&s=10" /> */}
@@ -37,22 +42,26 @@ const MessageContainer = () => {
         </div>
 
         <div className="flex flex-col flex-1">
+
+        {/* new  */}
           <div className="flex justify-between gap-2">
             {/* <p className="text-sm">{selectedUser?.fullName}</p> */}
             <p className="text-sm">{selectedUser?selectedUser.fullName: "Select some users"}</p>
           </div>
         </div>
       </div>
+
+      {/* till here header div  */}
       <Messages />
         <SendInput/>
     </div>
 
       ):(
-        <div className=" flex flex-col justify-center text-center">
+        <div className="w-1/2 lg:w-2/3 flex flex-col justify-center text-center">
           <div>
             {authUser && <h2 className="text-4xl text-white font-bold">Hi {authUser?.fullName}</h2>}
           <h2 className="text-2xl text-white">
-            {/* Hi,{} */}
+           
             Let's start conversation
             </h2>
           </div>

@@ -52,6 +52,8 @@ import { useSelector } from 'react-redux';
 const OtherUsers = () => {
   // my custom hook 
   useGetOtherUser();
+  
+
   const {otherUsers} = useSelector((store)=>store.user); // both are same (this is destructuring)
   // const otherUsers = useSelector((state)=>state.user.otherUsers); (directly accessing the property)
   // console.log("Hello world")
@@ -71,8 +73,17 @@ const OtherUsers = () => {
 //   })
 // }
 
-  if(!OtherUsers) return; // early return in react
-  
+// this never runs 
+  console.log("this is before other users", otherUsers);
+
+  if(!otherUsers) return; // early return in react
+console.log("this is otherusers", otherUsers);
+// if(!otherUsers?.success) return;
+  console.log("this is after other users", otherUsers);
+
+
+
+
   return (
     // <div className='overflow-auto'>
     <div className='overflow-auto flex-1'>

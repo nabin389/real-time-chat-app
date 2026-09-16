@@ -14,7 +14,7 @@ import { setAuthUser } from "../redux/userSlice";
 
 
 const Login = () => {
- 
+ console.log("this")
 
   const [user, setUser] = useState({
     username:"",

@@ -33,26 +33,6 @@ const router = createBrowserRouter([
   },
 ]);
 const App = () => {
-  // can also add set loading feature
-  // to make app that works even when page refresh  that is authUser we get from backend using cookie from browser
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const getCurrentUser = async () => {
-      try {
-        const res = await axios.get("http://localhost:3000/api/v1/user/me", {
-          withCredentials: true,
-        });
-
-        console.log("From here ");
-        console.log(res);
-        dispatch(setAuthUser(res.data));
-      } catch (error) {
-        console.log("User is not logged in");
-        console.log("Error: ", error); // commented this
-      }
-    };
-    getCurrentUser();
-  }, [dispatch]); // give dispatch empty can also workd
 
   return (
     <div className="p-4 h-screen flex items-center justify-center">

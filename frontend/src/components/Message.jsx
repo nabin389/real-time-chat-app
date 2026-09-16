@@ -8,6 +8,7 @@ const Message = ({message}) => {
   // do it later after the completion of basic things 
   // console.log("This is auth user: ", authUser)
   // console.log("This is message: ", message);
+  // console.log("This is selectedUser: ", selectedUser);
   // const isSender = authUser?._id === message?.senderId;
   // console.log("This is result --> ", isSender);
 
@@ -27,9 +28,9 @@ const Message = ({message}) => {
       <div ref={scroll} className={`chat ${authUser?._id === message?.senderId ? 'chat-end': 'chat-start'} `}>
         <div className="chat-image avatar">
           <div className="w-10 rounded-full">
-            <img
+           
+            {/* <img
               alt="Tailwind CSS chat bubble component"
-              // src="https://img.daisyui.com/images/profile/demo/kenobee@192.webp"
 
               // this work if page doesnot refresh 
               // src={message.senderId === authUser?._id? authUser?.profilePhoto: selectedUser?.profilePhoto}
@@ -41,19 +42,26 @@ const Message = ({message}) => {
               "https://img.daisyui.com/images/profile/demo/kenobee@192.webp":
               selectedUser?.profilePhoto
              }
-            />
+            /> */}
+
+            <img 
+            src={
+              message?.senderId === authUser?._id ?
+              authUser?.profilePhoto:
+              selectedUser?.profilePhoto
+            } 
+            alt="User Photo"
+             />
+
           </div>
         </div>
 
         <div className="chat-header">
-          <time className="text-xs opacity-50">12:45</time>
+          {/* <time className="text-xs opacity-50">12:45</time> */}
         </div>
-        {/* <div className="chat-bubble bg-zinc-200 text-sm">
-          You were the Chosen One!
-        </div> */}
+      
         <div className="chat-bubble bg-zinc-200 text-sm">
           {message.message}
-          {/* {message? message:<h2>message</h2>} */}
         </div>
       </div>
     </div>
