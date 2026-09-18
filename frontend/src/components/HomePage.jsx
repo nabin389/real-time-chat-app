@@ -29,7 +29,7 @@ const HomePage = () => {
   const navigate = useNavigate();
   const {authUser} = useSelector(store=>store.user);
 
-
+console.log("at first: ", authUser);
   const dispatch = useDispatch();
   useEffect(() => {
     const getCurrentUser = async () => {
@@ -60,7 +60,7 @@ const HomePage = () => {
   }, [dispatch]); // give dispatch, empty can also work
 
 
-
+console.log("at second: ", authUser);
 
 
 

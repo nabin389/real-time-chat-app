@@ -56,6 +56,8 @@ const Login = () => {
  
       console.log("Response comes on login: ", res);
       toast.success(res.data.message);
+      // console.log("onligin:", res.data.message);
+      // return;
       dispatch(setAuthUser(res.data));
 
       navigate("/");

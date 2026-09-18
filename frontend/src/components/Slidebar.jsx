@@ -95,11 +95,7 @@ const Slidebar = () => {
       <div className="divider px-3" > </div>
       <OtherUsers/>
       <div className="mt-2 ">
-        {/* <button onClick={()=>{logoutHandler()}} className="btn btn-sm  bg-gray-300  border-gray-400  rounded-[7px]">Logout</button> */}
 
-        {/* this was before hooks implementation  */}
-        {/* <button onClick={logoutHandler} className="btn btn-sm  bg-gray-300  border-gray-400  rounded-[7px]">Logout</button> */}
-        {/* <Logout handleLogouot={logoutHandler}/> */}
         <button onClick={logoutHandler} className="btn btn-sm  bg-gray-300  border-gray-400  rounded-[7px]">
           Logout
         </button>

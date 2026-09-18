@@ -53,6 +53,9 @@ const OtherUsers = () => {
   // my custom hook 
   useGetOtherUser();
   
+const {authUser} = useSelector((store)=>store.user);
+console.log("third: ", authUser);
+
 
   const {otherUsers} = useSelector((store)=>store.user); // both are same (this is destructuring)
   // const otherUsers = useSelector((state)=>state.user.otherUsers); (directly accessing the property)

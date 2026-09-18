@@ -22,7 +22,7 @@ const useGetOtherUser = () => {
         // note if user is not authenticated then status comes false then display on tost
         // then navigate to login
         if(res?.data?.success === false){
-          console.log("this is success:", res.data.success);
+          console.log("this is success inside  hook:", res.data.success);
           toast.error(res?.data?.message);
           navigate('/login');
           return;
