@@ -38,11 +38,13 @@ app.use(cookieParser());
 app.use("/uploads", express.static("uploads"))
 
 app.use(cors({
-  // origin: "https://real-time-chat-app-1-ueft.onrender.com",
-  // origin: "https://realtimemessage-3bj9ar70m-nabin389s-projects.vercel.app",
   origin: "https://realtimemessage-git-main-nabin389s-projects.vercel.app",
   credentials: true
-}))
+}));
+
+app.get("/", (req, res) => {
+    res.send("Backend is running successfully!");
+});
 
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/message", messageRoute);
