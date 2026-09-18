@@ -22,15 +22,14 @@ import MessageContainer from './MessageContainer'
 import { useDispatch, useSelector } from 'react-redux'
 import { setAuthUser } from '../redux/userSlice'
 import axios from "axios";
+import { useNavigate } from 'react-router-dom'
 
 
 const HomePage = () => {
-
+  const navigate = useNavigate();
   const {authUser} = useSelector(store=>store.user);
 
 
-    // can also add set loading feature
-  // to make app that works even when page refresh  that is authUser we get from backend using cookie from browser
   const dispatch = useDispatch();
   useEffect(() => {
     const getCurrentUser = async () => {
@@ -38,6 +37,15 @@ const HomePage = () => {
         const res = await axios.get("https://real-time-chat-app-1-ueft.onrender.com/api/v1/user/me", {
           withCredentials: true,
         });
+
+
+         if(res?.data?.success === false){
+                  console.log("this is success:", res.data.success);
+                  // toast.error(res?.data?.message);
+                  navigate('/login');
+                  return;
+                }
+        
         // console.log("From here ");
         // console.log(res);
         // console.log("this is the response of current user: ", res.data);
@@ -54,11 +62,7 @@ const HomePage = () => {
 
 
 
-  // if(authUser){
-  //   console.log("This is authUser:", authUser);
 
-  // }
-  // console.log("This is next");
 
   if(!authUser){
    return(
