@@ -54,7 +54,7 @@ const Signup = () => {
     // return;
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/v1/user/register",
+        "https://real-time-chat-app-1-ueft.onrender.com/api/v1/user/register",
         // user,
         formData,
         {

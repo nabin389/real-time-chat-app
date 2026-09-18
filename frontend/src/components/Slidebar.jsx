@@ -26,7 +26,7 @@ const Slidebar = () => {
           // navigate('/login');
     try{
       console.log("Before logout response");
-      const res = await axios.get('http://localhost:3000/api/v1/user/logout');
+      const res = await axios.get('https://real-time-chat-app-1-ueft.onrender.com/api/v1/user/logout');
       console.log("Before logout response");
       console.log("This is: ", res);
       console.log("This is: ", res.data.message);

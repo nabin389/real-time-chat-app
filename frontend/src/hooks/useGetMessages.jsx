@@ -23,7 +23,7 @@ const useGetMessages = () => {
                 // const res = await axios.get(`http://localhost:3000/api/v1/message/6a8d4d1610a4aaf94074706b`);
                 // console.log("Before response: ");
                 // console.log(selectedUser?._id);
-                const res = await axios.get(`http://localhost:3000/api/v1/message/${selectedUser?._id}`);
+                const res = await axios.get(`https://real-time-chat-app-1-ueft.onrender.com/api/v1/message/${selectedUser?._id}`);
 
                 // console.log("After response comes: ");
                 // console.log("This: ", res.data.conversation.messages);

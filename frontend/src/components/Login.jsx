@@ -43,7 +43,7 @@ const Login = () => {
   // useEffect(()=> { // added by me
      try {
       const res = await axios.post(
-        "http://localhost:3000/api/v1/user/login",
+        "https://real-time-chat-app-1-ueft.onrender.com/api/v1/user/login",
         user,
         {
           headers: {

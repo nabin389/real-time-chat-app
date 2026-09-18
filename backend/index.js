@@ -38,7 +38,7 @@ app.use(cookieParser());
 app.use("/uploads", express.static("uploads"))
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: "https://real-time-chat-app-1-ueft.onrender.com",
   credentials: true
 }))
 

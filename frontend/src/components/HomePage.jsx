@@ -35,7 +35,7 @@ const HomePage = () => {
   useEffect(() => {
     const getCurrentUser = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/v1/user/me", {
+        const res = await axios.get("https://real-time-chat-app-1-ueft.onrender.com/api/v1/user/me", {
           withCredentials: true,
         });
         // console.log("From here ");

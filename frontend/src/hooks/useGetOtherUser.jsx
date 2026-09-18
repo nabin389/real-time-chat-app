@@ -13,7 +13,7 @@ const useGetOtherUser = () => {
       try {
         // get other user
         axios.defaults.withCredentials = true;
-        const res = await axios.get("http://localhost:3000/api/v1/user/");
+        const res = await axios.get("https://real-time-chat-app-1-ueft.onrender.com/api/v1/user/");
 
         console.log("Dont know: ", res);
 
