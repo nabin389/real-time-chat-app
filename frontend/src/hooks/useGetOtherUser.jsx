@@ -17,26 +17,13 @@ const useGetOtherUser = () => {
 
         console.log("Dont know: ", res);
 
-        // login
-        // const res = await axios.post(
-        //   "http://localhost:3000/api/v1/user/login",
-        //   {
-        //     username: "nabin567",
-        //     password: "helloworld",
-        //   },
-        //   {
-        //     withCredentials: true,
-        //   },
-        // );
-        // console.log("response comes from backend");
-        // console.log(res.data);
-        //store
+ 
         console.log("data comes for other users");
         // note if user is not authenticated then status comes false then display on tost
         // then navigate to login
-        if(res.data.success === false){
+        if(res?.data?.success === false){
           console.log("this is success:", res.data.success);
-          toast.error(res.data.message);
+          toast.error(res?.data?.message);
           navigate('/login');
           return;
         }
