@@ -37,8 +37,17 @@ app.use(cookieParser());
 // access to uploads folder
 app.use("/uploads", express.static("uploads"))
 
+// app.use(cors({
+//   origin: "https://realtimemessage-git-main-nabin389s-projects.vercel.app",
+//   credentials: true
+// }));
+
 app.use(cors({
-  origin: "https://realtimemessage-git-main-nabin389s-projects.vercel.app",
+  origin: [
+    "http://localhost:5173",
+    "https://realtimemessage-git-main-nabin389s-projects.vercel.app",
+    "https://realtimemessage-3bj9ar70m-nabin389s-projects.vercel.app"
+  ],
   credentials: true
 }));
 
