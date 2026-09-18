@@ -21,7 +21,7 @@ import cors from "cors"
 
 dotenv.config({});
 const app = express()
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 
 
 // app.use(cors({
@@ -38,7 +38,8 @@ app.use(cookieParser());
 app.use("/uploads", express.static("uploads"))
 
 app.use(cors({
-  origin: "https://real-time-chat-app-1-ueft.onrender.com",
+  // origin: "https://real-time-chat-app-1-ueft.onrender.com",
+  origin: "https://realtimemessage-3bj9ar70m-nabin389s-projects.vercel.app",
   credentials: true
 }))
 
