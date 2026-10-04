@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedUser } from '../redux/userSlice';
 
 const OtherUser = ({user}) => {
+    console.log("this comes inside other User from map: ", user);
     const dispatch = useDispatch();
     const {selectedUser} = useSelector(store=>store.user);
     // console.log("Value from redux: ", selectedUser?._id);
@@ -14,10 +15,7 @@ const OtherUser = ({user}) => {
     // console.log(user.profilePhoto);
   
   function selectedUserHandler(user){
-
-
     dispatch(setSelectedUser(user));
-
     // console.log("this is props");
     // console.log(props)
     // console.log("you have clicked on here");
@@ -35,7 +33,8 @@ const OtherUser = ({user}) => {
                 <div className='avatar online'>
                     <div className='w-10 rounded-full m-2'>
                         {/* <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyh9ZR7j2Oi5JHGSIe2mt2cgeVlwQb4mXg3kXIaPgEJQ&s=10"/> */}
-                        <img src={user.profilePhoto}/>
+                        {/* // this has removed because this creates error */}
+                        <img src={user?.profilePhoto}/> 
                     </div>
                 </div>
 

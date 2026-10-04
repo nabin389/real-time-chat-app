@@ -6,6 +6,8 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const useGetOtherUser = () => {
+    console.log("this is get other users");
+
   const navigate = useNavigate(); // to navigate into login page if user is not authenticated
   const dispatch = useDispatch();
   useEffect(() => {
