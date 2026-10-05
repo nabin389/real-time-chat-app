@@ -76,21 +76,13 @@ const Signup = () => {
       navigate("/login");
       }
 
-      // console.log("Response: ", res);
 
     } catch (error) {
       console.log("Error has occured: ", error);
       toast.error(error.response.data.message);
       console.log("Error has occured: ", error);
     }
-    // console.log(user);
-    // setUser({
-    //   fullName: "",
-    //   username: "",
-    //   password: "",
-    //   confirmPassword: "",
-    //   gender: "",
-    // });
+ 
   };
   return (
     <div className="min-h-screen w-full flex items-center justify-center px-4">
