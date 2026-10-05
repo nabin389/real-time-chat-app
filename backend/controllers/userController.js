@@ -4,6 +4,9 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { sendEmail } from "../services/sendEmail.js";
+import { v2 as cloudinary } from "cloudinary";
+import fs from "fs";
+
 
 // for nodemailer
 // this is not needed this wass only for testing 
@@ -192,6 +195,111 @@ export const register = async (req, res) => {
     });
   }
 };
+
+
+// For Claudinary
+export const registerClaudinary = async (req, res) => {
+  console.log("control come to register claudinary");
+  const userData = JSON.parse(req.body.user);
+  // const userData = req.body;
+  console.log("This is userdata: ", userData);
+
+  try {
+    // 1. claudinay setup
+    // 2. then upload data on database
+
+    cloudinary.config({
+      cloud_name: process.env.cloud_name,
+      api_key: process.env.API_KEY,
+      api_secret: process.env.API_SECRET,
+      // Click 'View API Keys' above to copy your API secret
+    });
+
+    const file = req.file;
+    console.log("This is file: ", file);
+    if (!file) {
+      return res.json({
+        message: "Profile Picture is Required",
+      });
+    }
+
+    // upload on claudinary
+    const uploadResult = await cloudinary.uploader.upload(req.file.path);
+    console.log("after claudinary");
+    console.log(uploadResult);
+
+    // then delete from our device
+    fs.unlink(req.file.path, (err) => {
+      if (err) {
+        console.log("Error occured: ", err);
+      } else {
+        console.log("Deleted file: ", req.file.path);
+      }
+    });
+
+
+    const { fullName, username, email, password, confirmPassword, gender } =
+      userData;
+
+
+    if (
+      !fullName ||
+      !username ||
+      !email ||
+      !password ||
+      !confirmPassword ||
+      !gender
+    ) {
+      return res.status(200).json({ message: "All fields are required" });
+    }
+
+    if (password !== confirmPassword) {
+      return res.status(400).json({ message: "Password do not match" });
+    }
+
+    const user = await User.findOne({ username });
+    if (user) {
+      return res
+        .status(400)
+        .json({ message: "Username already exit try different", user: user });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // For default image
+
+   const userAccount =  await User.create({
+      fullName,
+      username,
+      email,
+      password: hashedPassword,
+      profilePhoto: uploadResult.secure_url,
+      gender
+    });
+
+    const sendData = {
+      to: email,
+      subject: "Successful Registration",
+      text: `Welcome to our page, ${email}`,
+    };
+    await sendEmail(sendData);
+
+    return res.status(201).json({
+      message: "Account created successfully",
+      userAccount: userAccount
+
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(401).json({
+      message: "Error has occured",
+      error,
+    });
+  }
+};
+
+
+
 
 export const login = async (req, res) => {
   const { username, password } = req.body;

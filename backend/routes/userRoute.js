@@ -1,5 +1,5 @@
 import express from "express";
-import { deleteUsers, getCurrentUser, getOtherUsers, login, logout, register, registerMulter, test } from "../controllers/userController.js";
+import { deleteUsers, getCurrentUser, getOtherUsers, login, logout, register, registerClaudinary, registerMulter, test } from "../controllers/userController.js";
 import isAuthenticated from "../middleware/isAuthenticated.js";
 
 const router = express.Router();
@@ -14,6 +14,7 @@ const upload = multer({storage:storage});
 // replacing registerMulter with register so that frontend can directly access this 
 // router.route("/registerMulter").post(upload.single("profilePhoto"),registerMulter);
 router.route("/register").post(upload.single("profilePhoto"),registerMulter);
+router.route("/registerClaudinary").post(upload.single("profilePhoto"),registerClaudinary);
 
 // this is the testing of nodemailer 
 router.route("/test").post(test);
