@@ -7,9 +7,8 @@ import { sendEmail } from "../services/sendEmail.js";
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
 
-
 // for nodemailer
-// this is not needed this wass only for testing 
+// this is not needed this wass only for testing
 export const test = async (req, res) => {
   const { title, email } = req.body;
 
@@ -116,30 +115,30 @@ export const registerMulter = async (req, res) => {
 };
 
 // this is used for solving refresh problem
-export const getCurrentUser = async(req, res)=>{
+export const getCurrentUser = async (req, res) => {
   const id = req.id;
-  try{
+  try {
     const user = await User.findById(id);
-    if(!user){
+    if (!user) {
       return res.json({
-        message: "User not found"
-      })
+        message: "User not found",
+      });
     }
 
     return res.json({
       message: "This is user data",
-        _id: user._id,
-        username: user.username,
-        fullName: user.fullName,
-        profilePhoto: user.profilePhoto,
-    })
-  } catch(error){
+      _id: user._id,
+      username: user.username,
+      fullName: user.fullName,
+      profilePhoto: user.profilePhoto,
+    });
+  } catch (error) {
     return res.json({
       message: "error has occured",
-       error
-    })
+      error,
+    });
   }
-}
+};
 
 export const register = async (req, res) => {
   try {
@@ -196,15 +195,14 @@ export const register = async (req, res) => {
   }
 };
 
-
 // For Claudinary
 export const registerClaudinary = async (req, res) => {
   console.log("control come to register claudinary");
-  const userData = JSON.parse(req.body.user);
-  // const userData = req.body;
-  console.log("This is userdata: ", userData);
 
   try {
+    const userData = JSON.parse(req.body.user);
+    // const userData = req.body;
+    console.log("This is userdata: ", userData);
     // 1. claudinay setup
     // 2. then upload data on database
 
@@ -237,10 +235,8 @@ export const registerClaudinary = async (req, res) => {
       }
     });
 
-
     const { fullName, username, email, password, confirmPassword, gender } =
       userData;
-
 
     if (
       !fullName ||
@@ -268,13 +264,13 @@ export const registerClaudinary = async (req, res) => {
 
     // For default image
 
-   const userAccount =  await User.create({
+    const userAccount = await User.create({
       fullName,
       username,
       email,
       password: hashedPassword,
       profilePhoto: uploadResult.secure_url,
-      gender
+      gender,
     });
 
     const sendData = {
@@ -286,20 +282,16 @@ export const registerClaudinary = async (req, res) => {
 
     return res.status(201).json({
       message: "Account created successfully",
-      userAccount: userAccount
-
+      userAccount: userAccount,
     });
   } catch (error) {
     console.log(error);
-    return res.status(401).json({
+    return res.status(500).json({
       message: "Error has occured",
-      error,
+      error: error.message,
     });
   }
 };
-
-
-
 
 export const login = async (req, res) => {
   const { username, password } = req.body;
@@ -318,9 +310,7 @@ export const login = async (req, res) => {
         .json({ message: "Incorrect username or password", success: false });
     }
 
-
     const isPasswordMatch = await bcrypt.compare(password, user.password);
-
 
     if (!isPasswordMatch) {
       return res.status(400).json({
@@ -373,9 +363,17 @@ export const login = async (req, res) => {
 
 export const logout = (req, res) => {
   try {
-    return res.status(200).cookie("token", "", { maxAge: 0 }).json({
-      message: "Logged out successfully.",
-    });
+    return res
+      .status(200)
+      .cookie("token", "", {
+        maxAge: 0,
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      })
+      .json({
+        message: "Logged out successfully.",
+      });
   } catch (error) {
     console.log(error);
     return res.json({
@@ -384,6 +382,19 @@ export const logout = (req, res) => {
     });
   }
 };
+// export const logout = (req, res) => {
+//   try {
+//     return res.status(200).cookie("token", "", { maxAge: 0 }).json({
+//       message: "Logged out successfully.",
+//     });
+//   } catch (error) {
+//     console.log(error);
+//     return res.json({
+//       message: "Error has occured",
+//       error,
+//     });
+//   }
+// };
 
 export const getOtherUsers = async (req, res) => {
   // it give other users that has not loged in i.e other users
