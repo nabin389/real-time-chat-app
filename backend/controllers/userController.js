@@ -363,22 +363,22 @@ export const login = async (req, res) => {
 
 export const logout = (req, res) => {
   try {
-    return res
-      .status(200)
-      .cookie("token", "", {
-        maxAge: 0,
-        httpOnly: true,
-        secure: true,
-        sameSite: "none",
-      })
-      .json({
-        message: "Logged out successfully.",
-      });
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      path: "/",
+    });
+
+    return res.status(200).json({
+      message: "Logged out successfully.",
+      success: true,
+    });
   } catch (error) {
     console.log(error);
-    return res.json({
-      message: "Error has occured",
-      error,
+
+    return res.status(500).json({
+      message: "Error has occurred",
     });
   }
 };
